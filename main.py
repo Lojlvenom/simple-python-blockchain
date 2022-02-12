@@ -1,8 +1,14 @@
 import fastapi as _fastapi
 import blockchain as _blockchain
 
+app_desc = {
+    'title':'Simple python blockchain API',
+    'version':'1.0.0',
+    
+}
+
 bc = _blockchain.Blockchain()
-app = _fastapi.FastAPI()
+app = _fastapi.FastAPI(**app_desc)
 
 
 def validade_blockchain():
@@ -11,20 +17,20 @@ def validade_blockchain():
             status_code= 400, detail="Blockchain nao e valida"
         )
 
-@app.get("/")
+@app.get("/", tags=["Endpoints"])
 def hello():
     return {
         "message":"Bem vindo ao simple python blockchain API, para saber mais acesse /docs"
     }
 
 # EP PARA ADICIONAR UM BLOCO
-@app.post("/mine_block/")
+@app.post("/mine_block/", tags=["Endpoints"])
 def mine_block(data: dict):
     validade_blockchain()
     block = bc.mine_block(data)
     return block
 
-@app.get("/blockchain/")
+@app.get("/blockchain/", tags=["Endpoints"])
 def get_blockchain():
     validade_blockchain
     chain = bc.chain
