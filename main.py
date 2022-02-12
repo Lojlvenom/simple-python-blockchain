@@ -35,3 +35,15 @@ def get_blockchain():
     validade_blockchain
     chain = bc.chain
     return chain
+
+@app.get('/check_is_valid', tags=["Endpoints"])
+def check_is_valid():
+    is_valid = validade_blockchain()
+    if is_valid:
+        return {
+            "message": "Is valid"
+        }
+    else:
+        return {
+            "message": "Not valid"
+        }
