@@ -10,7 +10,13 @@ def validade_blockchain():
         return _fastapi.HTTPException(
             status_code= 400, detail="Blockchain nao e valida"
         )
-    
+
+@app.get("/")
+def hello():
+    return {
+        "message":"Bem vindo ao simple python blockchain API, para saber mais acesse /docs"
+    }
+
 # EP PARA ADICIONAR UM BLOCO
 @app.post("/mine_block/")
 def mine_block(data: dict):
