@@ -12,9 +12,9 @@ class Blockchain:
         self.chain.append(genesis_block)
 
     def _to_digest(
-        self, new_proof: int, previous_proof: int, index: int, data: str
+        self, new_proof: int, previous_proof: int, index: int
     ) -> bytes:
-        to_digest = str(new_proof**2 - previous_proof + index) + data
+        to_digest = str(new_proof**2 - previous_proof + index) 
         return to_digest.encode()
 
     def _proof_of_work(self, previous_proof: str, index: int, data: str) -> int:
@@ -25,7 +25,6 @@ class Blockchain:
             to_digest = self._to_digest(
                 new_proof=new_proof,
                 previous_proof=previous_proof,
-                data=data,
                 index=index,
             )
             hash_value = _hashlib.sha256(to_digest).hexdigest()
@@ -80,9 +79,8 @@ class Blockchain:
 
             current_proof = current_block["proof"]
 
-            next_index, next_data, next_proof = {
+            next_index, next_proof = {
                 next_block["index"],
-                next_block["data"],
                 next_block["proof"],
             }
 
@@ -90,8 +88,7 @@ class Blockchain:
                 self._to_digest(
                     new_proof=next_proof,
                     previous_proof=current_proof,
-                    index=next_index,
-                    data=next_data,
+                    index=next_index
                 )
             ).hexdigest()
 

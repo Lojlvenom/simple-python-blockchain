@@ -25,7 +25,7 @@ def hello():
 
 # EP PARA ADICIONAR UM BLOCO
 @app.post("/mine_block/", tags=["Endpoints"])
-def mine_block(data: dict):
+def mine_block(data: str):
     validade_blockchain()
     block = bc.mine_block(data)
     return block
